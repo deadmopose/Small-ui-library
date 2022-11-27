@@ -74,3 +74,22 @@ section.new_dropdown("Info", get_table, function(value) -- Put function that ret
     print(value)
 end)
 ```
+
+# Customizing the color scheme example
+
+```lua
+getgenv().color_schemes = {
+	white_orange = {
+		header_color = Color3.fromRGB(45, 49, 66),
+		mid_color = Color3.fromRGB(191, 192, 192),
+		hover_color = Color3.fromRGB(45, 49, 66),
+		standard_color = Color3.fromRGB(79, 93, 117),
+		enabled_color = Color3.fromRGB(239, 131, 84),
+		scroll_bar_color = Color3.fromRGB(0, 0, 0),
+		text_labels_color = Color3.fromRGB(255, 255, 255),
+		background_color = Color3.fromRGB(255, 255, 255)
+	}
+}
+
+getgenv().color_scheme = getgenv().color_schemes.white_orange
+```
