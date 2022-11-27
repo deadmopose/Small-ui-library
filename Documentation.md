@@ -1,7 +1,7 @@
 # Creating window
 
 ```lua
-local window = loadstring(game:HttpGet("https://raw.githubusercontent.com/deadmopose/Small-ui-library/main/Script.lua"))()
+local window = loadstring(game:HttpGet("https://raw.githubusercontent.com/deadmopose/Small-ui-library/main/Script.lua"))("example_window_name")
 ```
 
 # Creating tab
@@ -51,7 +51,7 @@ end)
 # Example of use
 
 ```lua
-local window = loadstring(game:HttpGet("https://raw.githubusercontent.com/deadmopose/Small-ui-library/main/Script.lua"))()
+local window = loadstring(game:HttpGet("https://raw.githubusercontent.com/deadmopose/Small-ui-library/main/Script.lua"))("example_window_name")
 
 local tab = window:new_tab("tab_name")
 
@@ -60,5 +60,17 @@ local section = tab.new_section("section_name")
 
 section.new_toggle("Info", function(state)
     print("New state: " .. state)
+end)
+```
+
+# Dropdown auto update use example
+
+```lua
+local function get_table()
+    return {1, 2, 3}
+end
+
+section.new_dropdown("Info", get_table, function(value) -- Put function that returns a table instead of a table
+    print(value)
 end)
 ```
