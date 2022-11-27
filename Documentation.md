@@ -90,15 +90,15 @@ getgenv().color_schemes = {
 		background_color = Color3.fromRGB(255, 255, 255)
 	},
 	
-	custom = { -- This is just an example so i didn't change any of the colors
-		header_color = Color3.fromRGB(45, 49, 66),
-		mid_color = Color3.fromRGB(191, 192, 192),
-		hover_color = Color3.fromRGB(45, 49, 66),
-		standard_color = Color3.fromRGB(79, 93, 117),
+	custom = { -- Dark theme pog?
+		header_color = Color3.fromRGB(40, 40, 40),
+		mid_color = Color3.fromRGB(50, 50, 50),
+		hover_color = Color3.fromRGB(40, 40, 40),
+		standard_color = Color3.fromRGB(70, 70, 70),
 		enabled_color = Color3.fromRGB(239, 131, 84),
-		scroll_bar_color = Color3.fromRGB(0, 0, 0),
+		scroll_bar_color = Color3.fromRGB(255, 255, 255),
 		text_labels_color = Color3.fromRGB(255, 255, 255),
-		background_color = Color3.fromRGB(255, 255, 255)
+		background_color = Color3.fromRGB(35, 35, 35)
 	}
 }
 
