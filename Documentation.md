@@ -59,7 +59,7 @@ local section = tab.new_section("section_name")
 
 
 section.new_toggle("Info", function(state)
-    print("New state: " .. state)
+    print("New state: " .. tostring(state))
 end)
 ```
 
