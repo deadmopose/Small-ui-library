@@ -1,1 +1,3 @@
-# Small-ui-library
+# Example of use
+
+local
