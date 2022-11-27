@@ -554,52 +554,53 @@ local function create_window(window_info)
 
 
 
+			for _, v in pairs({section_button, ImageButton}) do
+				v.InputBegan:Connect(function(input)
+					if input.UserInputType == Enum.UserInputType.MouseButton1 and input.UserInputState == Enum.UserInputState.Begin and not section_button_busy then
+						-- Setup
 
-			section_button.InputBegan:Connect(function(input)
-				if input.UserInputType == Enum.UserInputType.MouseButton1 and input.UserInputState == Enum.UserInputState.Begin and not section_button_busy then
-					-- Setup
-
-					section_button_busy = true
-
-
-
-					-- Variables
-
-					local speed = math.clamp(0.25 * (UIListLayout.AbsoluteContentSize.Y / 210), 0, 1.5)
+						section_button_busy = true
 
 
 
+						-- Variables
 
-					-- (Open or Close) section
-
-					if not section_content.Visible then
-						section_content.Visible = true
+						local speed = math.clamp(0.25 * (UIListLayout.AbsoluteContentSize.Y / 210), 0, 1.5)
 
 
-						tween_service:Create(section_content, TweenInfo.new(speed, Enum.EasingStyle.Sine, Enum.EasingDirection.Out), {Size = UDim2.fromOffset(section_content.Size.X.Offset, UIListLayout.AbsoluteContentSize.Y + 12)}):Play()
 
-						tween_service:Create(ImageButton, TweenInfo.new(speed, Enum.EasingStyle.Sine, Enum.EasingDirection.Out), {Rotation = 180}):Play()
-					else
-						tween_service:Create(section_content, TweenInfo.new(speed, Enum.EasingStyle.Sine, Enum.EasingDirection.Out), {Size = UDim2.fromOffset(section_content.Size.X.Offset, 0)}):Play()
 
-						tween_service:Create(ImageButton, TweenInfo.new(speed, Enum.EasingStyle.Sine, Enum.EasingDirection.Out), {Rotation = 0}):Play()
+						-- (Open or Close) section
 
+						if not section_content.Visible then
+							section_content.Visible = true
+
+
+							tween_service:Create(section_content, TweenInfo.new(speed, Enum.EasingStyle.Sine, Enum.EasingDirection.Out), {Size = UDim2.fromOffset(section_content.Size.X.Offset, UIListLayout.AbsoluteContentSize.Y + 12)}):Play()
+
+							tween_service:Create(ImageButton, TweenInfo.new(speed, Enum.EasingStyle.Sine, Enum.EasingDirection.Out), {Rotation = 180}):Play()
+						else
+							tween_service:Create(section_content, TweenInfo.new(speed, Enum.EasingStyle.Sine, Enum.EasingDirection.Out), {Size = UDim2.fromOffset(section_content.Size.X.Offset, 0)}):Play()
+
+							tween_service:Create(ImageButton, TweenInfo.new(speed, Enum.EasingStyle.Sine, Enum.EasingDirection.Out), {Rotation = 0}):Play()
+
+
+							task.delay(speed, function()
+								section_content.Visible = false
+							end)
+						end
+
+
+
+
+						-- Debounce end
 
 						task.delay(speed, function()
-							section_content.Visible = false
+							section_button_busy = false	
 						end)
 					end
-
-
-
-
-					-- Debounce end
-
-					task.delay(speed, function()
-						section_button_busy = false	
-					end)
-				end
-			end)
+				end)
+			end
 
 
 
@@ -733,7 +734,7 @@ local function create_window(window_info)
 				disabled.BorderSizePixel = 0
 				disabled.Position = UDim2.new(0.910000026, 0, 0.174999997, 0)
 				disabled.Size = UDim2.new(0.074000001, 0, 0.649999976, 0)
-				disabled.ZIndex = 3
+				disabled.ZIndex = 2
 				disabled.Image = "rbxassetid://3926309567"
 				disabled.ImageRectOffset = Vector2.new(628, 420)
 				disabled.ImageRectSize = Vector2.new(48, 48)
@@ -753,51 +754,53 @@ local function create_window(window_info)
 
 
 				-- Connections
+				
+				for _, v in pairs({toggle, enabled, disabled}) do
+					v.InputBegan:Connect(function(input)
+						if input.UserInputType == Enum.UserInputType.MouseButton1 and input.UserInputState == Enum.UserInputState.Begin and not toggle_busy then
+							-- Setup
 
-				toggle.InputBegan:Connect(function(input)
-					if input.UserInputType == Enum.UserInputType.MouseButton1 and input.UserInputState == Enum.UserInputState.Begin and not toggle_busy then
-						-- Setup
-
-						toggle_busy = true
-
-
-						-- Change state
-
-						state = not state
+							toggle_busy = true
 
 
-						-- Callback
+							-- Change state
 
-						callback(state)
-
-
-						-- Stop hover
-
-						tween_service:Create(toggle, TweenInfo.new(0.3, Enum.EasingStyle.Sine), {BackgroundColor3 = color_scheme.standard_color}):Play()
+							state = not state
 
 
+							-- Callback
 
-						-- (Enable or Disable) toggle
+							callback(state)
 
-						if enabled.ImageTransparency == 1 then
-							tween_service:Create(disabled, TweenInfo.new(0.3, Enum.EasingStyle.Sine), {ImageTransparency = 1}):Play()
 
-							tween_service:Create(enabled, TweenInfo.new(0.3, Enum.EasingStyle.Sine), {ImageTransparency = 0}):Play()
-						else
-							tween_service:Create(disabled, TweenInfo.new(0.3, Enum.EasingStyle.Sine), {ImageTransparency = 0}):Play()
+							-- Stop hover
 
-							tween_service:Create(enabled, TweenInfo.new(0.3, Enum.EasingStyle.Sine), {ImageTransparency = 1}):Play()
+							tween_service:Create(toggle, TweenInfo.new(0.3, Enum.EasingStyle.Sine), {BackgroundColor3 = color_scheme.standard_color}):Play()
+
+
+
+							-- (Enable or Disable) toggle
+
+							if enabled.ImageTransparency == 1 then
+								tween_service:Create(disabled, TweenInfo.new(0.3, Enum.EasingStyle.Sine), {ImageTransparency = 1}):Play()
+
+								tween_service:Create(enabled, TweenInfo.new(0.3, Enum.EasingStyle.Sine), {ImageTransparency = 0}):Play()
+							else
+								tween_service:Create(disabled, TweenInfo.new(0.3, Enum.EasingStyle.Sine), {ImageTransparency = 0}):Play()
+
+								tween_service:Create(enabled, TweenInfo.new(0.3, Enum.EasingStyle.Sine), {ImageTransparency = 1}):Play()
+							end
+
+
+
+							-- Debounce end
+
+							task.delay(0.3, function()
+								toggle_busy = false
+							end)
 						end
-
-
-
-						-- Debounce end
-
-						task.delay(0.3, function()
-							toggle_busy = false
-						end)
-					end
-				end)
+					end)
+				end
 			end
 
 
@@ -1343,17 +1346,19 @@ local function create_window(window_info)
 
 
 				-- Connections
+				
+				for _, v in pairs({dropdown_button, ImageButton}) do
+					v.InputBegan:Connect(function(input)
+						if input.UserInputType == Enum.UserInputType.MouseButton1 and input.UserInputState == Enum.UserInputState.Begin and not dropdown_busy then
+							if not dropdown_content.Visible then
+								add_buttons(type(array) == "function" and array() or array)
+							end
 
-				dropdown_button.InputBegan:Connect(function(input)
-					if input.UserInputType == Enum.UserInputType.MouseButton1 and input.UserInputState == Enum.UserInputState.Begin and not dropdown_busy then
-						if not dropdown_content.Visible then
-							add_buttons(type(array) == "function" and array() or array)
+
+							change_state(not dropdown_content.Visible)
 						end
-
-
-						change_state(not dropdown_content.Visible)
-					end
-				end)
+					end)
+				end
 			end
 
 
@@ -1575,26 +1580,26 @@ local function create_window(window_info)
 
 
 				-- Connections
+				
+				for _, v in pairs({dropdown_button, ImageButton}) do
+					v.InputBegan:Connect(function(input)
+						if input.UserInputType == Enum.UserInputType.MouseButton1 and input.UserInputState == Enum.UserInputState.Begin and not dropdown_busy then
+							if not dropdown_content.Visible then
+								add_buttons(type(array) == "function" and array() or array)
+							end
 
-				dropdown_button.InputBegan:Connect(function(input)
-					if input.UserInputType == Enum.UserInputType.MouseButton1 and input.UserInputState == Enum.UserInputState.Begin and not dropdown_busy then
-						if not dropdown_content.Visible then
-							add_buttons(type(array) == "function" and array() or array)
+
+							change_state(not dropdown_content.Visible)
 						end
-
-
-						change_state(not dropdown_content.Visible)
-					end
-				end)
+					end)
+				end
 			end
-
 
 
 
 
 			return section_functions
 		end
-
 
 
 
