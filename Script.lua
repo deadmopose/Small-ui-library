@@ -220,13 +220,6 @@ end
 
 
 
--- Set window
-
-local window = create_window()
-
-
-
-
 
 -- Window functions
 
