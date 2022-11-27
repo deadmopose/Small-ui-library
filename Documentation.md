@@ -47,3 +47,18 @@ section.new_dropdown2("Info", {1, 2, 3}, function(value)
     -- Something
 end)
 ```
+
+# Example of use
+
+```lua
+local window = loadstring(game:HttpGet("https://raw.githubusercontent.com/deadmopose/Small-ui-library/main/Script.lua"))()
+
+local tab = window:new_tab("tab_name")
+
+local section = tab.new_section("section_name")
+
+
+section.new_toggle("Info", function(state)
+    print("New state: " .. state)
+end)
+```
