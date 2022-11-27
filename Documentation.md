@@ -79,7 +79,18 @@ end)
 
 ```lua
 getgenv().color_schemes = {
-	white_orange = {
+	white_orange = { -- Original
+		header_color = Color3.fromRGB(45, 49, 66),
+		mid_color = Color3.fromRGB(191, 192, 192),
+		hover_color = Color3.fromRGB(45, 49, 66),
+		standard_color = Color3.fromRGB(79, 93, 117),
+		enabled_color = Color3.fromRGB(239, 131, 84),
+		scroll_bar_color = Color3.fromRGB(0, 0, 0),
+		text_labels_color = Color3.fromRGB(255, 255, 255),
+		background_color = Color3.fromRGB(255, 255, 255)
+	},
+	
+	custom = { -- This is just an example so i didn't change any of the colors
 		header_color = Color3.fromRGB(45, 49, 66),
 		mid_color = Color3.fromRGB(191, 192, 192),
 		hover_color = Color3.fromRGB(45, 49, 66),
@@ -91,5 +102,10 @@ getgenv().color_schemes = {
 	}
 }
 
-getgenv().color_scheme = getgenv().color_schemes.white_orange
+getgenv().color_scheme = getgenv().color_schemes.custom
+
+
+-- Create window with new color scheme
+
+local window = loadstring(game:HttpGet("https://raw.githubusercontent.com/deadmopose/Small-ui-library/main/Script.lua"))("example_window_name")
 ```
