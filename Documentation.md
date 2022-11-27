@@ -1,7 +1,5 @@
-# Example of use
+# Initializing a window
 
 ```lua
--- Initialize
-
-loadstring(game:HttpGet("https://raw.githubusercontent.com/deadmopose/Small-ui-library/main/Script.lua"))()
+local window = loadstring(game:HttpGet("https://raw.githubusercontent.com/deadmopose/Small-ui-library/main/Script.lua"))()
 ```
