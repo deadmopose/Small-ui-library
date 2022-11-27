@@ -15,21 +15,22 @@ local local_player = players.LocalPlayer
 
 local mouse = local_player:GetMouse()
 
-local color_schemes = {
-	white_orange = {
-		header_color = Color3.fromRGB(45, 49, 66),
-		mid_color = Color3.fromRGB(191, 192, 192),
-		hover_color = Color3.fromRGB(45, 49, 66),
-		standard_color = Color3.fromRGB(79, 93, 117),
-		enabled_color = Color3.fromRGB(239, 131, 84),
-		scroll_bar_color = Color3.fromRGB(0, 0, 0),
-		text_labels_color = Color3.fromRGB(255, 255, 255),
-		background_color = Color3.fromRGB(255, 255, 255)
+if not getgenv().color_scheme then
+	getgenv().color_schemes = {
+		white_orange = {
+			header_color = Color3.fromRGB(45, 49, 66),
+			mid_color = Color3.fromRGB(191, 192, 192),
+			hover_color = Color3.fromRGB(45, 49, 66),
+			standard_color = Color3.fromRGB(79, 93, 117),
+			enabled_color = Color3.fromRGB(239, 131, 84),
+			scroll_bar_color = Color3.fromRGB(0, 0, 0),
+			text_labels_color = Color3.fromRGB(255, 255, 255),
+			background_color = Color3.fromRGB(255, 255, 255)
+		}
 	}
-}
 
-local color_scheme = color_schemes.white_orange
-
+	getgenv().color_scheme = getgenv().color_schemes.white_orange
+end
 
 
 
@@ -105,7 +106,7 @@ local function create_window(window_info)
 	end
 
 
-	holder.BackgroundColor3 = color_scheme.header_color
+	holder.BackgroundColor3 = getgenv().color_scheme.header_color
 	holder.BorderSizePixel = 0
 	holder.Position = UDim2.new(0.235937506, 0, 0.150925919, 0)
 	holder.Size = UDim2.new(0, 470, 0, 32)
@@ -118,7 +119,7 @@ local function create_window(window_info)
 	TextLabel.ZIndex = 2
 	TextLabel.Font = Enum.Font.Gotham
 	TextLabel.Text = window_info or "small"
-	TextLabel.TextColor3 = color_scheme.text_labels_color
+	TextLabel.TextColor3 = getgenv().color_scheme.text_labels_color
 	TextLabel.TextScaled = true
 	TextLabel.TextSize = 14.000
 	TextLabel.TextWrapped = true
@@ -130,7 +131,7 @@ local function create_window(window_info)
 
 
 
-	tabs_frame.BackgroundColor3 = color_scheme.mid_color
+	tabs_frame.BackgroundColor3 = getgenv().color_scheme.mid_color
 	tabs_frame.BorderSizePixel = 0
 	tabs_frame.Size = UDim2.new(0, 163, 0, 291)
 	tabs_frame.Parent = holder
@@ -145,7 +146,7 @@ local function create_window(window_info)
 	tabs_scrolling_frame.Position = UDim2.new(0, 0, 0.134020612, 0)
 	tabs_scrolling_frame.Size = UDim2.new(1, 0, 0, 252)
 	tabs_scrolling_frame.ScrollBarThickness = 4
-	tabs_scrolling_frame.ScrollBarImageColor3 = color_scheme.scroll_bar_color
+	tabs_scrolling_frame.ScrollBarImageColor3 = getgenv().color_scheme.scroll_bar_color
 	tabs_scrolling_frame.CanvasSize = UDim2.fromOffset(0, 0)
 	tabs_scrolling_frame.VerticalScrollBarPosition = Enum.VerticalScrollBarPosition.Left
 	tabs_scrolling_frame.Parent = tabs_frame
@@ -158,7 +159,7 @@ local function create_window(window_info)
 
 
 
-	frame.BackgroundColor3 = color_scheme.background_color
+	frame.BackgroundColor3 = getgenv().color_scheme.background_color
 	frame.BorderSizePixel = 0
 	frame.Size = UDim2.new(0, 470, 0, 291)
 	frame.ZIndex = 0
@@ -288,7 +289,7 @@ local function create_window(window_info)
 		ScrollingFrame.BorderSizePixel = 0
 		ScrollingFrame.Position = UDim2.new(0.347, 0, 0.134020612, 0)
 		ScrollingFrame.Size = UDim2.new(0, 307, 0, 0)
-		ScrollingFrame.ScrollBarImageColor3 = color_scheme.scroll_bar_color
+		ScrollingFrame.ScrollBarImageColor3 = getgenv().color_scheme.scroll_bar_color
 		ScrollingFrame.ScrollBarThickness = 7
 		ScrollingFrame.Visible = false
 		ScrollingFrame.CanvasSize = UDim2.fromOffset(0, 0)
@@ -302,12 +303,12 @@ local function create_window(window_info)
 
 
 
-		button.BackgroundColor3 = color_scheme.standard_color
+		button.BackgroundColor3 = getgenv().color_scheme.standard_color
 		button.Position = UDim2.new(0.0460122712, 0, 0, 0)
 		button.Size = UDim2.new(0, 152, 0, 30)
 		button.Parent = tabs_scrolling_frame
 		button:SetAttribute("color", button.BackgroundColor3)
-		button:SetAttribute("hover_color", color_scheme.hover_color)
+		button:SetAttribute("hover_color", getgenv().color_scheme.hover_color)
 
 		connect_hover_effect(button, button)
 
@@ -364,11 +365,11 @@ local function create_window(window_info)
 					-- Disable every tab button
 
 					for _, v in pairs(tabs_scrolling_frame:GetChildren()) do
-						if v:IsA("Frame") and v:GetAttribute("color") == color_scheme.enabled_color then
-							v:SetAttribute("color", color_scheme.standard_color)
+						if v:IsA("Frame") and v:GetAttribute("color") == getgenv().color_scheme.enabled_color then
+							v:SetAttribute("color", getgenv().color_scheme.standard_color)
 
 
-							tween_service:Create(v, TweenInfo.new(0.3, Enum.EasingStyle.Sine), {BackgroundColor3 = color_scheme.standard_color}):Play()
+							tween_service:Create(v, TweenInfo.new(0.3, Enum.EasingStyle.Sine), {BackgroundColor3 = getgenv().color_scheme.standard_color}):Play()
 						end
 					end
 
@@ -376,10 +377,10 @@ local function create_window(window_info)
 
 					-- Enable tab button
 
-					button:SetAttribute("color", color_scheme.enabled_color)
+					button:SetAttribute("color", getgenv().color_scheme.enabled_color)
 
 
-					tween_service:Create(button, TweenInfo.new(0.3, Enum.EasingStyle.Sine), {BackgroundColor3 = color_scheme.enabled_color}):Play()
+					tween_service:Create(button, TweenInfo.new(0.3, Enum.EasingStyle.Sine), {BackgroundColor3 = getgenv().color_scheme.enabled_color}):Play()
 
 
 
@@ -410,10 +411,10 @@ local function create_window(window_info)
 				else
 					-- Disable tab button
 
-					button:SetAttribute("color", color_scheme.standard_color)
+					button:SetAttribute("color", getgenv().color_scheme.standard_color)
 
 
-					tween_service:Create(button, TweenInfo.new(0.3, Enum.EasingStyle.Sine), {BackgroundColor3 = color_scheme.standard_color}):Play()
+					tween_service:Create(button, TweenInfo.new(0.3, Enum.EasingStyle.Sine), {BackgroundColor3 = getgenv().color_scheme.standard_color}):Play()
 
 
 
@@ -480,12 +481,12 @@ local function create_window(window_info)
 
 			-- Properties
 
-			section_button.BackgroundColor3 = color_scheme.standard_color
+			section_button.BackgroundColor3 = getgenv().color_scheme.standard_color
 			section_button.Position = UDim2.new(0.0374592841, 0, 0, 0)
 			section_button.Size = UDim2.new(0, 295, 0, 34)
 			section_button.Parent = ScrollingFrame
 			section_button:SetAttribute("color", button.BackgroundColor3)
-			section_button:SetAttribute("hover_color", color_scheme.hover_color)
+			section_button:SetAttribute("hover_color", getgenv().color_scheme.hover_color)
 
 			connect_hover_effect(section_button, section_button)
 
@@ -499,7 +500,7 @@ local function create_window(window_info)
 			TextLabel.ZIndex = 2
 			TextLabel.Font = Enum.Font.Gotham
 			TextLabel.Text = section_info
-			TextLabel.TextColor3 = color_scheme.text_labels_color
+			TextLabel.TextColor3 = getgenv().color_scheme.text_labels_color
 			TextLabel.TextScaled = true
 			TextLabel.TextSize = 14.000
 			TextLabel.TextWrapped = true
@@ -515,13 +516,13 @@ local function create_window(window_info)
 			ImageButton.Image = "rbxassetid://3926305904"
 			ImageButton.ImageRectOffset = Vector2.new(404, 283)
 			ImageButton.ImageRectSize = Vector2.new(36, 36)
-			ImageButton.ImageColor3 = color_scheme.text_labels_color
+			ImageButton.ImageColor3 = getgenv().color_scheme.text_labels_color
 			ImageButton.Parent = section_button
 
 
 
 
-			section_content.BackgroundColor3 = color_scheme.mid_color
+			section_content.BackgroundColor3 = getgenv().color_scheme.mid_color
 			section_content.Position = UDim2.new(0.0195439737, 0, -1.14285719, 0)
 			section_content.Size = UDim2.new(0, 295, 0, 0)
 			section_content.Visible = false
@@ -625,12 +626,12 @@ local function create_window(window_info)
 
 				-- Properties
 
-				button.BackgroundColor3 = color_scheme.standard_color
+				button.BackgroundColor3 = getgenv().color_scheme.standard_color
 				button.Position = UDim2.new(0.0278449934, 0, 0.940730989, 0)
 				button.Size = UDim2.new(0, 284, 0, 26)
 				button.Parent = Frame
 				button:SetAttribute("color", button.BackgroundColor3)
-				button:SetAttribute("hover_color", color_scheme.hover_color)
+				button:SetAttribute("hover_color", getgenv().color_scheme.hover_color)
 
 				connect_hover_effect(button, button)
 
@@ -644,7 +645,7 @@ local function create_window(window_info)
 				TextLabel.ZIndex = 2
 				TextLabel.Font = Enum.Font.Gotham
 				TextLabel.Text = button_info
-				TextLabel.TextColor3 = color_scheme.text_labels_color
+				TextLabel.TextColor3 = getgenv().color_scheme.text_labels_color
 				TextLabel.TextScaled = true
 				TextLabel.TextSize = 14.000
 				TextLabel.TextWrapped = true
@@ -703,12 +704,12 @@ local function create_window(window_info)
 
 				-- Properties
 
-				toggle.BackgroundColor3 = color_scheme.standard_color
+				toggle.BackgroundColor3 = getgenv().color_scheme.standard_color
 				toggle.Position = UDim2.new(0.0278449934, 0, 0.829019189, 0)
 				toggle.Size = UDim2.new(0, 284, 0, 30)
 				toggle.Parent = Frame
 				toggle:SetAttribute("color", button.BackgroundColor3)
-				toggle:SetAttribute("hover_color", color_scheme.hover_color)
+				toggle:SetAttribute("hover_color", getgenv().color_scheme.hover_color)
 
 				connect_hover_effect(toggle, toggle)
 
@@ -722,14 +723,14 @@ local function create_window(window_info)
 				TextLabel.ZIndex = 2
 				TextLabel.Font = Enum.Font.Gotham
 				TextLabel.Text = toggle_info
-				TextLabel.TextColor3 = color_scheme.text_labels_color
+				TextLabel.TextColor3 = getgenv().color_scheme.text_labels_color
 				TextLabel.TextScaled = true
 				TextLabel.TextSize = 14.000
 				TextLabel.TextWrapped = true
 				TextLabel.TextXAlignment = Enum.TextXAlignment.Left
 				TextLabel.Parent = toggle
 
-				disabled.BackgroundColor3 = color_scheme.text_labels_color
+				disabled.BackgroundColor3 = getgenv().color_scheme.text_labels_color
 				disabled.BackgroundTransparency = 1.000
 				disabled.BorderSizePixel = 0
 				disabled.Position = UDim2.new(0.910000026, 0, 0.174999997, 0)
@@ -746,7 +747,7 @@ local function create_window(window_info)
 				enabled.ImageTransparency = 1
 				enabled.ZIndex = 2
 				enabled.Image = "rbxassetid://3926309567"
-				enabled.ImageColor3 = color_scheme.enabled_color
+				enabled.ImageColor3 = getgenv().color_scheme.enabled_color
 				enabled.ImageRectOffset = Vector2.new(784, 420)
 				enabled.ImageRectSize = Vector2.new(48, 48)
 				enabled.Parent = toggle
@@ -775,7 +776,7 @@ local function create_window(window_info)
 
 							-- Stop hover
 
-							tween_service:Create(toggle, TweenInfo.new(0.3, Enum.EasingStyle.Sine), {BackgroundColor3 = color_scheme.standard_color}):Play()
+							tween_service:Create(toggle, TweenInfo.new(0.3, Enum.EasingStyle.Sine), {BackgroundColor3 = getgenv().color_scheme.standard_color}):Play()
 
 
 
@@ -820,7 +821,7 @@ local function create_window(window_info)
 
 				-- Properties
 
-				text_box.BackgroundColor3 = color_scheme.standard_color
+				text_box.BackgroundColor3 = getgenv().color_scheme.standard_color
 				text_box.Position = UDim2.new(0.0416810364, 0, 0.443395734, 0)
 				text_box.Size = UDim2.new(0, 284, 0, 30)
 				text_box.Parent = Frame
@@ -833,14 +834,14 @@ local function create_window(window_info)
 				TextLabel.Size = UDim2.new(0.445494711, 0, 0.633000016, 0)
 				TextLabel.Font = Enum.Font.Gotham
 				TextLabel.Text = text_box_info
-				TextLabel.TextColor3 = color_scheme.text_labels_color
+				TextLabel.TextColor3 = getgenv().color_scheme.text_labels_color
 				TextLabel.TextScaled = true
 				TextLabel.TextSize = 14.000
 				TextLabel.TextWrapped = true
 				TextLabel.TextXAlignment = Enum.TextXAlignment.Left
 				TextLabel.Parent = text_box
 
-				Frame_1.BackgroundColor3 = color_scheme.header_color
+				Frame_1.BackgroundColor3 = getgenv().color_scheme.header_color
 				Frame_1.Position = UDim2.new(0.513000011, 0, 0.100000001, 0)
 				Frame_1.Size = UDim2.new(0.477999985, 0, 0.800000012, 0)
 				Frame_1.Parent = text_box
@@ -852,7 +853,7 @@ local function create_window(window_info)
 				TextBox.ClearTextOnFocus = false
 				TextBox.Font = Enum.Font.Gotham
 				TextBox.Text = ""
-				TextBox.TextColor3 = color_scheme.text_labels_color
+				TextBox.TextColor3 = getgenv().color_scheme.text_labels_color
 				TextBox.TextScaled = true
 				TextBox.TextSize = 14.000
 				TextBox.TextWrapped = true
@@ -867,7 +868,7 @@ local function create_window(window_info)
 				-- Connections
 
 				TextBox.Focused:Connect(function()
-					tween_service:Create(Frame_1, TweenInfo.new(0.2, Enum.EasingStyle.Sine), {BackgroundColor3 = color_scheme.enabled_color}):Play()
+					tween_service:Create(Frame_1, TweenInfo.new(0.2, Enum.EasingStyle.Sine), {BackgroundColor3 = getgenv().color_scheme.enabled_color}):Play()
 				end)
 
 
@@ -880,7 +881,7 @@ local function create_window(window_info)
 
 						-- Tween backgroundcolor3 back
 
-						tween_service:Create(Frame_1, TweenInfo.new(0.2, Enum.EasingStyle.Sine), {BackgroundColor3 = color_scheme.header_color}):Play()
+						tween_service:Create(Frame_1, TweenInfo.new(0.2, Enum.EasingStyle.Sine), {BackgroundColor3 = getgenv().color_scheme.header_color}):Play()
 					end
 				end)
 			end
@@ -911,12 +912,12 @@ local function create_window(window_info)
 
 				-- Properties
 
-				key_bind.BackgroundColor3 = color_scheme.standard_color
+				key_bind.BackgroundColor3 = getgenv().color_scheme.standard_color
 				key_bind.Position = UDim2.new(0.0278449934, 0, 0.717307389, 0)
 				key_bind.Size = UDim2.new(0, 284, 0, 30)
 				key_bind.Parent = Frame
 				key_bind:SetAttribute("color", key_bind.BackgroundColor3)
-				key_bind:SetAttribute("hover_color", color_scheme.hover_color)
+				key_bind:SetAttribute("hover_color", getgenv().color_scheme.hover_color)
 				key_bind:SetAttribute("hover_effect_locked", false)
 
 				connect_hover_effect(key_bind, key_bind)
@@ -931,7 +932,7 @@ local function create_window(window_info)
 				key_bind_label.ZIndex = 2
 				key_bind_label.Font = Enum.Font.Gotham
 				key_bind_label.Text = key
-				key_bind_label.TextColor3 = color_scheme.text_labels_color
+				key_bind_label.TextColor3 = getgenv().color_scheme.text_labels_color
 				key_bind_label.TextScaled = true
 				key_bind_label.TextSize = 14.000
 				key_bind_label.TextWrapped = true
@@ -943,7 +944,7 @@ local function create_window(window_info)
 				info_label.ZIndex = 2
 				info_label.Font = Enum.Font.Gotham
 				info_label.Text = key_bind_info
-				info_label.TextColor3 = color_scheme.text_labels_color
+				info_label.TextColor3 = getgenv().color_scheme.text_labels_color
 				info_label.TextScaled = true
 				info_label.TextSize = 14.000
 				info_label.TextWrapped = true
@@ -965,7 +966,7 @@ local function create_window(window_info)
 
 						-- Tween color
 
-						tween_service:Create(key_bind, TweenInfo.new(0.2, Enum.EasingStyle.Sine), {BackgroundColor3 = color_scheme.enabled_color}):Play()
+						tween_service:Create(key_bind, TweenInfo.new(0.2, Enum.EasingStyle.Sine), {BackgroundColor3 = getgenv().color_scheme.enabled_color}):Play()
 					end
 				end)
 
@@ -982,7 +983,7 @@ local function create_window(window_info)
 
 							-- Tween color back to normal
 
-							tween_service:Create(key_bind, TweenInfo.new(0.2, Enum.EasingStyle.Sine), {BackgroundColor3 = color_scheme.standard_color}):Play()
+							tween_service:Create(key_bind, TweenInfo.new(0.2, Enum.EasingStyle.Sine), {BackgroundColor3 = getgenv().color_scheme.standard_color}):Play()
 
 
 							-- Debounce end
@@ -1017,7 +1018,7 @@ local function create_window(window_info)
 
 				-- Properties
 
-				slider.BackgroundColor3 = color_scheme.standard_color
+				slider.BackgroundColor3 = getgenv().color_scheme.standard_color
 				slider.Position = UDim2.new(0.0278449934, 0, 0.55267942, 0)
 				slider.Size = UDim2.new(0, 284, 0, 48)
 				slider.Parent = Frame
@@ -1030,7 +1031,7 @@ local function create_window(window_info)
 				value_label.ZIndex = 2
 				value_label.Font = Enum.Font.Gotham
 				value_label.Text = min_value
-				value_label.TextColor3 = color_scheme.text_labels_color
+				value_label.TextColor3 = getgenv().color_scheme.text_labels_color
 				value_label.TextScaled = true
 				value_label.TextSize = 14.000
 				value_label.TextWrapped = true
@@ -1043,14 +1044,14 @@ local function create_window(window_info)
 				info_label.ZIndex = 2
 				info_label.Font = Enum.Font.Gotham
 				info_label.Text = slider_info
-				info_label.TextColor3 = color_scheme.text_labels_color
+				info_label.TextColor3 = getgenv().color_scheme.text_labels_color
 				info_label.TextScaled = true
 				info_label.TextSize = 14.000
 				info_label.TextWrapped = true
 				info_label.TextXAlignment = Enum.TextXAlignment.Left
 				info_label.Parent = slider
 
-				bar.BackgroundColor3 = color_scheme.header_color
+				bar.BackgroundColor3 = getgenv().color_scheme.header_color
 				bar.BorderColor3 = Color3.fromRGB(255, 255, 255)
 				bar.BorderSizePixel = 0
 				bar.Position = UDim2.new(0.0333369859, 0, 0.699999809, 0)
@@ -1061,7 +1062,7 @@ local function create_window(window_info)
 				UICorner_2.CornerRadius = UDim.new(0, 100)
 				UICorner_2.Parent = bar
 
-				fill.BackgroundColor3 = color_scheme.enabled_color
+				fill.BackgroundColor3 = getgenv().color_scheme.enabled_color
 				fill.BorderColor3 = Color3.fromRGB(255, 255, 255)
 				fill.BorderSizePixel = 0
 				fill.Size = UDim2.new(0, 0, 1, 0)
@@ -1153,12 +1154,12 @@ local function create_window(window_info)
 
 				-- Properties
 
-				dropdown_button.BackgroundColor3 = color_scheme.standard_color
+				dropdown_button.BackgroundColor3 = getgenv().color_scheme.standard_color
 				dropdown_button.Position = UDim2.new(-0.0102041233, 0, 0, 0)
 				dropdown_button.Size = UDim2.new(0, 284, 0, 26)
 				dropdown_button.Parent = Frame
 				dropdown_button:SetAttribute("color", dropdown_button.BackgroundColor3)
-				dropdown_button:SetAttribute("hover_color", color_scheme.hover_color)
+				dropdown_button:SetAttribute("hover_color", getgenv().color_scheme.hover_color)
 
 				connect_hover_effect(dropdown_button, dropdown_button)
 
@@ -1171,7 +1172,7 @@ local function create_window(window_info)
 				TextLabel.ZIndex = 2
 				TextLabel.Font = Enum.Font.Gotham
 				TextLabel.Text = dropdown_info
-				TextLabel.TextColor3 = color_scheme.text_labels_color
+				TextLabel.TextColor3 = getgenv().color_scheme.text_labels_color
 				TextLabel.TextScaled = true
 				TextLabel.TextSize = 14.000
 				TextLabel.TextWrapped = true
@@ -1186,14 +1187,14 @@ local function create_window(window_info)
 				ImageButton.ZIndex = 2
 				ImageButton.Image = "rbxassetid://3926305904"
 				ImageButton.ImageRectOffset = Vector2.new(404, 283)
-				ImageButton.ImageColor3 =  color_scheme.text_labels_color
+				ImageButton.ImageColor3 =  getgenv().color_scheme.text_labels_color
 				ImageButton.ImageRectSize = Vector2.new(36, 36)
 				ImageButton.Parent = dropdown_button
 
 
 
 
-				dropdown_content.BackgroundColor3 = color_scheme.header_color
+				dropdown_content.BackgroundColor3 = getgenv().color_scheme.header_color
 				dropdown_content.Position = UDim2.new(0.0278449934, 0, 0.099952668, 0)
 				dropdown_content.Size = UDim2.new(0, 284, 0, 0)
 				dropdown_content.ClipsDescendants = true
@@ -1279,13 +1280,13 @@ local function create_window(window_info)
 
 						-- Properties
 
-						button.BackgroundColor3 = selected_element == v and color_scheme.enabled_color or color_scheme.standard_color
+						button.BackgroundColor3 = selected_element == v and getgenv().color_scheme.enabled_color or getgenv().color_scheme.standard_color
 						button.Position = UDim2.new(0.0334507041, 0, 0, 0)
 						button.Size = UDim2.new(0, 276, 0, 23)
 						button.BorderSizePixel = 0
 						button.Parent = dropdown_content
 						button:SetAttribute("color", button.BackgroundColor3)
-						button:SetAttribute("hover_color", color_scheme.hover_color)
+						button:SetAttribute("hover_color", getgenv().color_scheme.hover_color)
 
 						connect_hover_effect(button, button)
 
@@ -1299,7 +1300,7 @@ local function create_window(window_info)
 						TextLabel.ZIndex = 2
 						TextLabel.Font = Enum.Font.Gotham
 						TextLabel.Text = v
-						TextLabel.TextColor3 = color_scheme.text_labels_color
+						TextLabel.TextColor3 = getgenv().color_scheme.text_labels_color
 						TextLabel.TextScaled = true
 						TextLabel.TextSize = 14.000
 						TextLabel.TextWrapped = true
@@ -1318,7 +1319,7 @@ local function create_window(window_info)
 										if v:IsA("Frame") and v.TextLabel.Text == tostring(selected_element) then
 											v:SetAttribute("hover_effect_locked", true)
 
-											tween_service:Create(v, TweenInfo.new(0.3, Enum.EasingStyle.Sine), {BackgroundColor3 = color_scheme.standard_color}):Play()
+											tween_service:Create(v, TweenInfo.new(0.3, Enum.EasingStyle.Sine), {BackgroundColor3 = getgenv().color_scheme.standard_color}):Play()
 										end
 									end
 								end
@@ -1389,12 +1390,12 @@ local function create_window(window_info)
 
 				-- Properties
 
-				dropdown_button.BackgroundColor3 = color_scheme.standard_color
+				dropdown_button.BackgroundColor3 = getgenv().color_scheme.standard_color
 				dropdown_button.Position = UDim2.new(-0.0102041233, 0, 0, 0)
 				dropdown_button.Size = UDim2.new(0, 284, 0, 26)
 				dropdown_button.Parent = Frame
 				dropdown_button:SetAttribute("color", dropdown_button.BackgroundColor3)
-				dropdown_button:SetAttribute("hover_color", color_scheme.hover_color)
+				dropdown_button:SetAttribute("hover_color", getgenv().color_scheme.hover_color)
 
 				connect_hover_effect(dropdown_button, dropdown_button)
 
@@ -1407,7 +1408,7 @@ local function create_window(window_info)
 				TextLabel.ZIndex = 2
 				TextLabel.Font = Enum.Font.Gotham
 				TextLabel.Text = dropdown_info
-				TextLabel.TextColor3 = color_scheme.text_labels_color
+				TextLabel.TextColor3 = getgenv().color_scheme.text_labels_color
 				TextLabel.TextScaled = true
 				TextLabel.TextSize = 14.000
 				TextLabel.TextWrapped = true
@@ -1422,14 +1423,14 @@ local function create_window(window_info)
 				ImageButton.ZIndex = 2
 				ImageButton.Image = "rbxassetid://3926305904"
 				ImageButton.ImageRectOffset = Vector2.new(404, 283)
-				ImageButton.ImageColor3 =  color_scheme.text_labels_color
+				ImageButton.ImageColor3 =  getgenv().color_scheme.text_labels_color
 				ImageButton.ImageRectSize = Vector2.new(36, 36)
 				ImageButton.Parent = dropdown_button
 
 
 
 
-				dropdown_content.BackgroundColor3 = color_scheme.header_color
+				dropdown_content.BackgroundColor3 = getgenv().color_scheme.header_color
 				dropdown_content.Position = UDim2.new(0.0278449934, 0, 0.099952668, 0)
 				dropdown_content.Size = UDim2.new(0, 284, 0, 0)
 				dropdown_content.ClipsDescendants = true
@@ -1515,13 +1516,13 @@ local function create_window(window_info)
 
 						-- Properties
 
-						button.BackgroundColor3 = table.find(selected_elements, v) and color_scheme.enabled_color or color_scheme.standard_color
+						button.BackgroundColor3 = table.find(selected_elements, v) and getgenv().color_scheme.enabled_color or getgenv().color_scheme.standard_color
 						button.Position = UDim2.new(0.0334507041, 0, 0, 0)
 						button.Size = UDim2.new(0, 276, 0, 23)
 						button.BorderSizePixel = 0
 						button.Parent = dropdown_content
 						button:SetAttribute("color", button.BackgroundColor3)
-						button:SetAttribute("hover_color", color_scheme.hover_color)
+						button:SetAttribute("hover_color", getgenv().color_scheme.hover_color)
 
 						connect_hover_effect(button, button)
 
@@ -1535,7 +1536,7 @@ local function create_window(window_info)
 						TextLabel.ZIndex = 2
 						TextLabel.Font = Enum.Font.Gotham
 						TextLabel.Text = v
-						TextLabel.TextColor3 = color_scheme.text_labels_color
+						TextLabel.TextColor3 = getgenv().color_scheme.text_labels_color
 						TextLabel.TextScaled = true
 						TextLabel.TextSize = 14.000
 						TextLabel.TextWrapped = true
@@ -1553,16 +1554,16 @@ local function create_window(window_info)
 									table.insert(selected_elements, v)
 
 
-									button:SetAttribute("color", color_scheme.enabled_color)
+									button:SetAttribute("color", getgenv().color_scheme.enabled_color)
 
-									tween_service:Create(button, TweenInfo.new(0.3, Enum.EasingStyle.Sine), {BackgroundColor3 = color_scheme.enabled_color}):Play()
+									tween_service:Create(button, TweenInfo.new(0.3, Enum.EasingStyle.Sine), {BackgroundColor3 = getgenv().color_scheme.enabled_color}):Play()
 								else
 									table.remove(selected_elements, table.find(selected_elements, v))
 
 
-									button:SetAttribute("color", color_scheme.standard_color)
+									button:SetAttribute("color", getgenv().color_scheme.standard_color)
 
-									tween_service:Create(button, TweenInfo.new(0.3, Enum.EasingStyle.Sine), {BackgroundColor3 = color_scheme.standard_color}):Play()
+									tween_service:Create(button, TweenInfo.new(0.3, Enum.EasingStyle.Sine), {BackgroundColor3 = getgenv().color_scheme.standard_color}):Play()
 								end
 
 
