@@ -1611,4 +1611,4 @@ end
 
 
 
-return create_window
+return create_window()
