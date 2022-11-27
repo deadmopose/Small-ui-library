@@ -71,7 +71,7 @@ local function get_table()
 end
 
 section.new_dropdown("Info", get_table, function(value) -- Put function that returns a table instead of a table
-    print(value)
+    -- Something
 end)
 ```
 
