@@ -1,3 +1,6 @@
 # Example of use
 
-local
+
+-- Initialize
+
+loadstring(game:HttpGet("https://raw.githubusercontent.com/deadmopose/Small-ui-library/main/Script.lua"))()
