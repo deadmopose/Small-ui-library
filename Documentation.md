@@ -1,16 +1,16 @@
-# Creating window
+# Creating a window
 
 ```lua
 local window = loadstring(game:HttpGet("https://raw.githubusercontent.com/deadmopose/Small-ui-library/main/Script.lua"))("example_window_name")
 ```
 
-# Creating tab
+# Creating a tab
 
 ```lua
 local tab = window:new_tab("tab_name")
 ```
 
-# Creating section
+# Creating a section
 
 ```lua
 local section = tab.new_section("section_name")
@@ -105,7 +105,7 @@ getgenv().color_schemes = {
 getgenv().color_scheme = getgenv().color_schemes.custom
 
 
--- Create window with new color scheme
+-- Create a window with a new color scheme
 
 local window = loadstring(game:HttpGet("https://raw.githubusercontent.com/deadmopose/Small-ui-library/main/Script.lua"))("example_window_name")
 ```
