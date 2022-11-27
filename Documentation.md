@@ -19,31 +19,31 @@ local section = tab.new_section("section_name")
 # Creating elements
 
 ```lua
-section.new_button("Info", function()
+section.new_button("button_info", function()
     -- Something
 end)
 
-section.new_toggle("Info", function(state)
+section.new_toggle("toggle_info", function(state)
     -- Something
 end)
 
-section.new_text_box("Info", function(value)
+section.new_text_box("text_box_info", function(value)
     -- Something
 end)
 
-section.new_key_bind("Info" , "RightControl", function(value)
+section.new_key_bind("key_bind_info" , "RightControl", function(value)
     -- Something
 end)
 
-section.new_slider("Info", 0, 100, function(value)
+section.new_slider("slider_info", 0, 100, function(value)
     -- Something
 end)
 
-section.new_dropdown("Info", {1, 2, 3}, function(value)
+section.new_dropdown("dropdown_info", {1, 2, 3}, function(value)
     -- Something
 end)
 
-section.new_dropdown2("Info", {1, 2, 3}, function(value)
+section.new_dropdown2("dropdown2_info", {1, 2, 3}, function(value)
     -- Something
 end)
 ```
