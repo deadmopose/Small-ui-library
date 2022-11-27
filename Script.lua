@@ -59,14 +59,14 @@ local function create_window(window_info)
 
 
 
-		if core_gui:FindFirstChild(last_window_name) and last_window_name ~= window_name then
+		if core_gui:FindFirstChild(last_window_name) and last_window_name ~= window_functions.window_name then
 			core_gui[last_window_name]:Destroy()
 		end
 	end
 
 
 
-	writefile("small_library/last_window_name" .. "_" .. local_player.Name .. ".txt", http_service:JSONEncode(window_name))
+	writefile("small_library/last_window_name" .. "_" .. local_player.Name .. ".txt", window_functions.window_name)
 
 
 
@@ -98,7 +98,7 @@ local function create_window(window_info)
 	small.Name = window_functions.window_name
 	small.DisplayOrder = 3e8
 	small.ResetOnSpawn = false
-	small.Parent = local_player.PlayerGui
+	small.Parent = core_gui
 
 	if syn and syn.protect_gui then
 		syn.protect_gui(small)
@@ -1607,3 +1607,8 @@ local function create_window(window_info)
 	
 	return window_functions
 end
+
+
+
+
+return create_window
