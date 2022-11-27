@@ -70,7 +70,7 @@ local function get_table()
     return {1, 2, 3}
 end
 
-section.new_dropdown("Info", get_table, function(value) -- Put function that returns a table instead of a table
+section.new_dropdown("Info", get_table -- Put function that returns a table instead of a table, function(value)
     print(value)
 end)
 ```
