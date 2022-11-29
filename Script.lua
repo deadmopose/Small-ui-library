@@ -281,7 +281,6 @@ local function create_window(window_info)
 
 		-- Properties
 
-
 		ScrollingFrame.Active = true
 		ScrollingFrame.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 		ScrollingFrame.BackgroundTransparency = 1.000
@@ -306,6 +305,7 @@ local function create_window(window_info)
 		button.BackgroundColor3 = getgenv().color_scheme.standard_color
 		button.Position = UDim2.new(0.0460122712, 0, 0, 0)
 		button.Size = UDim2.new(0, 152, 0, 30)
+		button.BorderSizePixel = 0
 		button.Parent = tabs_scrolling_frame
 		button:SetAttribute("color", button.BackgroundColor3)
 		button:SetAttribute("hover_color", getgenv().color_scheme.hover_color)
